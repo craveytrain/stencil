@@ -4,10 +4,12 @@
  * It contains typing information for all components that exist in this project.
  */
 
-import '@stencil/core'
 
-import '@ionic/core'
-import 'ionicons'
+import '@stencil/core';
+
+import '@ionic/core';
+import 'ionicons';
+
 
 export namespace Components {
 
@@ -38,23 +40,24 @@ declare global {
     'app-root': Components.AppRootAttributes;
   }
 
+
   interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
   var HTMLAppHomeElement: {
     prototype: HTMLAppHomeElement;
     new (): HTMLAppHomeElement;
-  }
+  };
 
   interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
   var HTMLAppProfileElement: {
     prototype: HTMLAppProfileElement;
     new (): HTMLAppProfileElement;
-  }
+  };
 
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
   var HTMLAppRootElement: {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
-  }
+  };
 
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement
@@ -67,6 +70,7 @@ declare global {
     'app-profile': HTMLAppProfileElement;
     'app-root': HTMLAppRootElement;
   }
+
 
   export namespace JSX {
     export interface Element {}

@@ -7,8 +7,16 @@
 
 import '@stencil/core';
 
+import '@stencil/redux';
 import '@ionic/core';
 import 'ionicons';
+import {
+  Todo,
+  TodoState,
+} from './store/todos/types';
+import {
+  Action,
+} from '@stencil/redux';
 
 
 export namespace Components {
@@ -16,28 +24,41 @@ export namespace Components {
   interface AppHome {}
   interface AppHomeAttributes extends StencilHTMLAttributes {}
 
-  interface AppProfile {
-    'name': string;
-  }
-  interface AppProfileAttributes extends StencilHTMLAttributes {
-    'name'?: string;
-  }
-
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
+
+  interface TodoItem {
+    'todo': Todo;
+    'toggleTodo': Action;
+  }
+  interface TodoItemAttributes extends StencilHTMLAttributes {
+    'todo'?: Todo;
+    'toggleTodo'?: Action;
+  }
+
+  interface TodoList {
+    'todos': TodoState;
+    'toggleTodo': Action;
+  }
+  interface TodoListAttributes extends StencilHTMLAttributes {
+    'todos'?: TodoState;
+    'toggleTodo'?: Action;
+  }
 }
 
 declare global {
   interface StencilElementInterfaces {
     'AppHome': Components.AppHome;
-    'AppProfile': Components.AppProfile;
     'AppRoot': Components.AppRoot;
+    'TodoItem': Components.TodoItem;
+    'TodoList': Components.TodoList;
   }
 
   interface StencilIntrinsicElements {
     'app-home': Components.AppHomeAttributes;
-    'app-profile': Components.AppProfileAttributes;
     'app-root': Components.AppRootAttributes;
+    'todo-item': Components.TodoItemAttributes;
+    'todo-list': Components.TodoListAttributes;
   }
 
 
@@ -47,28 +68,36 @@ declare global {
     new (): HTMLAppHomeElement;
   };
 
-  interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
-  };
-
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
   var HTMLAppRootElement: {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
   };
 
+  interface HTMLTodoItemElement extends Components.TodoItem, HTMLStencilElement {}
+  var HTMLTodoItemElement: {
+    prototype: HTMLTodoItemElement;
+    new (): HTMLTodoItemElement;
+  };
+
+  interface HTMLTodoListElement extends Components.TodoList, HTMLStencilElement {}
+  var HTMLTodoListElement: {
+    prototype: HTMLTodoListElement;
+    new (): HTMLTodoListElement;
+  };
+
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement
-    'app-profile': HTMLAppProfileElement
     'app-root': HTMLAppRootElement
+    'todo-item': HTMLTodoItemElement
+    'todo-list': HTMLTodoListElement
   }
 
   interface ElementTagNameMap {
     'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
     'app-root': HTMLAppRootElement;
+    'todo-item': HTMLTodoItemElement;
+    'todo-list': HTMLTodoListElement;
   }
 
 

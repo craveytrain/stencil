@@ -1,29 +1,36 @@
-import { Component } from '@stencil/core';
+import { Component, Prop, State } from '@stencil/core';
+import { Store, Action } from "@stencil/redux";
+import { Actions } from "../../store/actions";
+import { RootState } from "../../store/reducers";
+import { TodoState } from "../../store/todos/types";
+import { toggleTodo } from "../../store/todos/actions";
 
 @Component({
-  tag: 'app-home',
-  styleUrl: 'app-home.css'
+  tag: "app-home",
+  styleUrl: "app-home.css"
 })
 export class AppHome {
+  @Prop({ context: "store" }) store: Store<RootState, Actions>;
+  @State() todos: TodoState;
+  toggleTodo: Action
+
+  componentWillLoad() {
+    this.store.mapStateToProps(this, state => {
+      const { todos } = state;
+
+      return {
+        todos
+      }
+    })
+
+    this.store.mapDispatchToProps(this, { toggleTodo })
+  }
 
   render() {
-    return [
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Home</ion-title>
-        </ion-toolbar>
-      </ion-header>,
-
+    return (
       <ion-content padding>
-        <p>
-          Welcome to the PWA Toolkit. You can use this starter to build entire
-          apps with web components using Stencil and ionic/core! Check out the
-          README for everything that comes in this starter out of the box and
-          check out our docs on <a href="https://stenciljs.com">stenciljs.com</a> to get started.
-        </p>
-
-        <ion-button href="/profile/ionic" expand="block">Profile page</ion-button>
+        <todo-list todos={this.todos} toggleTodo={this.toggleTodo} />
       </ion-content>
-    ];
+    )
   }
 }

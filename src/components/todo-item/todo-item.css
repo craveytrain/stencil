@@ -1,0 +1,7 @@
+.todo-item {
+  transition: opacity .3s ease-out;
+}
+
+.completed {
+  opacity: .4;
+}

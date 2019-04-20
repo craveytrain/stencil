@@ -1,5 +1,8 @@
-import { v4 as uuid } from "uuid"
 import { ADD_TODO, TOGGLE_TODO, TodoState, TodoActionTypes } from './types'
+
+let id = 0;
+
+const uuid = () => (id++).toString()
 
 const initialState: TodoState = []
 

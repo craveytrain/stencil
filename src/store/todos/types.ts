@@ -19,4 +19,6 @@ interface ToggleTodoAction {
   id: string
 }
 
-export type TodoActionTypes = AddTodoAction | ToggleTodoAction
+export type TodoActionTypes =
+  | AddTodoAction
+  | ToggleTodoAction

@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, TodoState, TodoActionTypes } from './types'
+import { ADD_TODO, TOGGLE_TODO, TodoState, TodoActionTypes, SAVE_TODO, DELETE_TODO, ENABLE_TODO_EDIT } from './types'
 
 let id = 0;
 
@@ -19,7 +19,8 @@ export const todos = (state = initialState, action?: TodoActionTypes): TodoState
         {
           id: uuid(),
           text: action.text,
-          completed: false
+          completed: false,
+          editable: true
         }
       ]
 
@@ -29,6 +30,34 @@ export const todos = (state = initialState, action?: TodoActionTypes): TodoState
           return {
             ...todo,
             completed: !todo.completed
+          }
+        }
+
+        return todo
+      })
+
+    case SAVE_TODO:
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            text: action.text,
+            editable: false
+          }
+        }
+
+        return todo
+      })
+
+    case DELETE_TODO:
+      return state.filter(todo => todo.id !== action.id)
+
+    case ENABLE_TODO_EDIT:
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            editable: true
           }
         }
 

@@ -3,16 +3,20 @@ import { Store, Action } from "@stencil/redux";
 import { Actions } from "../../store/actions";
 import { RootState } from "../../store/reducers";
 import { TodoState } from "../../store/todos/types";
-import { toggleTodo } from "../../store/todos/actions";
+import { toggleTodo, addTodo, saveTodo, deleteTodo, enableTodoEdit } from "../../store/todos/actions";
 
 @Component({
   tag: "app-home",
   styleUrl: "app-home.css"
 })
 export class AppHome {
-  @Prop({ context: "store" }) store: Store<RootState, Actions>;
-  @State() todos: TodoState;
+  @Prop({ context: "store" }) store: Store<RootState, Actions>
+  @State() todos: TodoState
   toggleTodo: Action
+  addTodo: Action
+  saveTodo: Action
+  deleteTodo: Action
+  enableTodoEdit: Action
 
   componentWillLoad() {
     this.store.mapStateToProps(this, state => {
@@ -23,14 +27,25 @@ export class AppHome {
       }
     })
 
-    this.store.mapDispatchToProps(this, { toggleTodo })
+    this.store.mapDispatchToProps(this, {
+      toggleTodo,
+      addTodo,
+      saveTodo,
+      deleteTodo,
+      enableTodoEdit
+    })
   }
 
   render() {
-    return (
-      <ion-content padding>
-        <todo-list todos={this.todos} toggleTodo={this.toggleTodo} />
-      </ion-content>
-    )
+    return [
+      <todo-header />,
+      <todo-list todos={this.todos}
+        toggleTodo={this.toggleTodo}
+        saveTodo={this.saveTodo}
+        deleteTodo={this.deleteTodo}
+        enableTodoEdit={this.enableTodoEdit}
+      />,
+      <add-todo addTodo={this.addTodo} />
+    ];
   }
 }

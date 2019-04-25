@@ -14,7 +14,8 @@ const defaultState = {
     },
     {
       text: 'holas',
-      id: '2'
+      id: '2',
+      completed: false
     }
   ]
 };
